@@ -2,7 +2,9 @@ import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router-dom
 import { helperI18Next } from 'universal-helper';
 
 import P000Login from '../../domain/p000-login';
+import P001Register from '../../domain/p001-register';
 import P100Dashboard from '../../domain/p100-dashboard';
+import P101Userdashboard from '../../domain/p101-userdashboard';
 import P200ThreeJS from '../../domain/p200-threejs';
 import P300ImpactJS from '../../domain/p300-impactjs';
 import P400ThreejsGo from '../../domain/p400-threejsgo';
@@ -18,6 +20,8 @@ const i18nList: helperI18Next.TypeI18NDomain[] = [
   P300ImpactJS.I18N,
   P400ThreejsGo.I18N,
   P500Menu.I18N,
+  P001Register.I18N,
+  P101Userdashboard.I18N,
 ];
 
 const JSX = (props: any) => {
@@ -41,13 +45,16 @@ const JSX = (props: any) => {
             </RoutePrivate>
           }
         >
-          <Route index element={<Navigate replace to="dashboard" />} />
+          <Route index element={<Navigate replace to="userdashboard" />} />
+          <Route path="userdashboard" element={<P101Userdashboard.JSX />} />
+
           <Route path="dashboard" element={<P100Dashboard.JSX />} />
           <Route path="threejs" element={<P200ThreeJS.JSX />} />
           <Route path="impactjs" element={<P300ImpactJS.JSX />} />
           <Route path="threejsgo" element={<P400ThreejsGo.JSX />} />
           <Route path="menu" element={<P500Menu.JSX />} />
         </Route>
+        <Route path="register" element={<P001Register.JSX />} />
         <Route path="*" element={<div>URLs Not Found</div>} />
       </Routes>
     </BrowserRouter>

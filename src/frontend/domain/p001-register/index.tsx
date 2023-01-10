@@ -15,15 +15,17 @@ import {
   useStoreGlobalPersist,
 } from '../../global/store/persist';
 import initI18N from './i18n';
+//import { update } from 'firebase/database';
 
 const testUser = 't@t.com';
 const testPassword = 'testtest1234';
 
-const sI18nDomainName = 'login';
+const sI18nDomainName = 'register';
 const I18N: helperI18Next.TypeI18NDomain = initI18N({ name: sI18nDomainName });
 
 const schema = yup.object({
-  username: yup.string().required('validate.required').email('validate.email'),
+  username: yup.string().required('validate.required'),
+  email: yup.string().required('validate.required').email('validate.email'),
   password: yup
     .string()
     .required('validate.required')
@@ -41,7 +43,7 @@ const JSX = () => {
   } = useForm({ resolver: yupResolver(schema), mode: 'onChange' });
 
   const { setLoading } = getMethodStoreGlobal();
-  const { setUserData } = getMethodStoreGlobalPersist();
+  const { setUserDatas } = getMethodStoreGlobalPersist();
   const { userDatas } = useStoreGlobalPersist(['userDatas']);
 
   const navigate = useNavigate();
@@ -58,45 +60,46 @@ const JSX = () => {
     return indexR;
   };
 
-  const firebaseLogin = async (sEmail: string, sPassword: string) => {
+  const Register = async (sEmail: string, sUsername: string, sPassword: string) => {
     setLoading(true);
     await helperTime.WaitForMilliSecond(300);
     setLoading(false);
 
-    const userDataIndex = GetUserDataIndexByEmail(sEmail);
+    // set new userdata
+    // setUserDatas([
+    //   {
+    //     email: 't@t.com',
+    //     username: 'sUsername',
+    //     password: 'testtest1234',
+    //     gamescore: 0,
+    //   },
+    // ]);
+    // console.log('Save');
+    // return;
 
-    if (userDataIndex == -1) {
-      setError('username', {
+    if (GetUserDataIndexByEmail(sEmail) != -1) {
+      setError('email', {
         type: 'custom',
-        message: 'validate.userNotFound',
+        message: 'validate.dupicateEmail',
       });
       return;
     }
 
-    if (sPassword == 'global') {
-      setError('global', {
-        type: 'custom',
-        message: 'validate.networkRequestFailed',
-      });
-      return;
-    }
+    const newUserdata = {
+      email: sEmail,
+      username: sUsername,
+      password: sPassword,
+      gamescore: 0,
+    };
+    const temp = userDatas;
+    temp.push(newUserdata);
 
-    //if (sPassword != testPassword) {
-    if (sPassword != userDatas[userDataIndex].password) {
-      setError('password', {
-        type: 'custom',
-        message: 'validate.passwordWrong',
-      });
-      return;
-    }
-
-    console.log('sign in');
-    setUserData(userDatas[userDataIndex]);
-    navigate('/user/dashboard');
+    setUserDatas(temp);
+    navigate('/');
   };
 
   const onSubmit = async (data: any) => {
-    await firebaseLogin(data.username, data.password);
+    await Register(data.email, data.username, data.password);
   };
 
   const [isShowPassword, setIsShowPassword] = useState(false);
@@ -109,15 +112,8 @@ const JSX = () => {
       <div className="RSU">
         <div className="HScreen w-sm container mx-auto flex max-w-full flex-col justify-center">
           <div className="text-center text-7xl font-medium text-gray-500">
-            Boilerplate
+            {t('form.title')}
           </div>
-          {/* <select
-              onChange={(event: any) => i18n.changeLanguage(event.target.value)}
-              value={i18n.language}
-            >
-              <option value="en">EN</option>
-              <option value="th">TH</option>
-            </select> */}
           <div className="mt-7 flex flex-row justify-center gap-x-2 text-xl">
             <input
               type="radio"
@@ -152,7 +148,7 @@ const JSX = () => {
                   <input
                     {...register('username')}
                     placeholder={t('form.username.placeholder') || ''}
-                    type="email"
+                    type="text"
                     className="h-10 flex-1 pl-2 pt-1 text-xl text-gray-600 placeholder-gray-400 focus:border-gray-600 focus:bg-white focus:placeholder-gray-500 focus:outline-none "
                   />
                 </div>
@@ -160,6 +156,30 @@ const JSX = () => {
               {errors.username && (
                 <div className="mt-2 h-5 text-left text-red-500">
                   {helperI18Next.MappingObject(errors.username.message, t)}
+                </div>
+              )}
+
+              <div
+                className={
+                  'border-1 w-full rounded border-gray-300 bg-white placeholder-gray-600 shadow-md focus:border-gray-600 focus:bg-white focus:placeholder-gray-500 focus:outline-none ' +
+                  (errors.email || errors.global ? 'border-2 border-red-500' : '')
+                }
+              >
+                <div className="flex divide-x-2 divide-gray-300 py-0.5 pr-2">
+                  <div className="my-auto w-10 flex-none pb-0.5">
+                    <RiUserLine color="DimGray" size="1.2em" className="m-auto block" />
+                  </div>
+                  <input
+                    {...register('email')}
+                    placeholder={t('form.email.placeholder') || ''}
+                    type="email"
+                    className="h-10 flex-1 pl-2 pt-1 text-xl text-gray-600 placeholder-gray-400 focus:border-gray-600 focus:bg-white focus:placeholder-gray-500 focus:outline-none "
+                  />
+                </div>
+              </div>
+              {errors.email && (
+                <div className="mt-2 h-5 text-left text-red-500">
+                  {helperI18Next.MappingObject(errors.email.message, t)}
                 </div>
               )}
               <div
@@ -215,28 +235,22 @@ const JSX = () => {
                 disabled:bg-gray-500
                 disabled:text-gray-300"
               >
-                {t('form.login')}
+                {t('form.button')}
               </button>
             </div>
           </form>
           <button
             onClick={() => {
-              navigate('/register');
+              navigate('/');
             }}
             className="bg-primary hover:bg-primary-hover mt-7
-                block w-full rounded
+                block rounded
                 px-6 py-3 text-3xl  font-medium text-white shadow-xl
                 disabled:bg-gray-500
                 disabled:text-gray-300"
           >
-            {t('register.signup')}
+            {t('form.backbutton')}
           </button>
-          <div className="mt-5 grid grid-cols-2 text-xl">
-            <div>User : {testUser}</div>
-            <div>Password : {testPassword}</div>
-            <div>Test Globel Error</div>
-            <div>Password : global</div>
-          </div>
         </div>
       </div>
     </div>

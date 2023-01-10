@@ -55,7 +55,7 @@ const UITemplateMobile = (props: any) => {
               <LinkSafe
                 className="flex justify-items-center"
                 disabled={menu.iIconID === 1}
-                to="/user/dashboard"
+                to="/user/userdashboard"
               >
                 <BiHome
                   className={menu.iIconID === 1 ? 'text-primary-select' : 'text-primary'}

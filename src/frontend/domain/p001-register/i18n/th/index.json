@@ -1,12 +1,17 @@
 {
   "form": {
     "username": {
+      "placeholder": "ชื่อผู้ใช้"
+    },
+    "email": {
       "placeholder": "อีเมล"
     },
     "password": {
       "placeholder": "รหัสผ่าน"
     },
-    "login": "เข้าสู่ระบบ"
+    "title": "สมัคร",
+    "button": "สมัคร",
+    "backbutton": "กลับ"
   },
   "validate": {
     "required": "กรุณากรอกในช่องว่าง",
@@ -14,9 +19,7 @@
     "userNotFound": "ไม่พบผู้ใช้งาน",
     "passwordWrong": "รหัสผ่านไม่ถูกต้อง",
     "email": "รูปแบบอีเมลไม่ถูกต้อง",
-    "networkRequestFailed": "ไม่สามารถเชื่อมต่ออินเตอร์เน็ตได้"
-  },
-  "register": {
-    "signup": "สมัคร"
+    "networkRequestFailed": "ไม่สามารถเชื่อมต่ออินเตอร์เน็ตได้",
+    "dupicateEmail": "อีเมลนี้ถูกใช้งานแล้ว"
   }
 }

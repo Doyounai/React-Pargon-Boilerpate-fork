@@ -1,0 +1,10 @@
+{
+  "header": "UserDashboard",
+  "text": "ENG",
+  "dashboard": {
+    "username": "Username",
+    "email": "Email",
+    "gamescore": "Gamescore"
+  },
+  "logout": "Logout"
+}

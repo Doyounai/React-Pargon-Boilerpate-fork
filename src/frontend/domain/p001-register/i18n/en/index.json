@@ -1,12 +1,17 @@
 {
   "form": {
     "username": {
+      "placeholder": "username"
+    },
+    "email": {
       "placeholder": "email"
     },
     "password": {
       "placeholder": "password"
     },
-    "login": "login"
+    "title": "Register",
+    "button": "Sign Up",
+    "backbutton": "back"
   },
   "validate": {
     "required": "please filling space",
@@ -15,9 +20,7 @@
     "userNotFound": "uset not found",
     "passwordWrong": "wrong password",
     "email": "invalid email type",
-    "networkRequestFailed": "can't connect network"
-  },
-  "register": {
-    "signup": "Sign Up"
+    "networkRequestFailed": "can't connect network",
+    "dupicateEmail": "This email have use before"
   }
 }
