@@ -5,6 +5,7 @@ import P000Login from '../../domain/p000-login';
 import P001Register from '../../domain/p001-register';
 import P100Dashboard from '../../domain/p100-dashboard';
 import P101Userdashboard from '../../domain/p101-userdashboard';
+import P102Scoreboard from '../../domain/p102-scoreboard';
 import P200ThreeJS from '../../domain/p200-threejs';
 import P300ImpactJS from '../../domain/p300-impactjs';
 import P400ThreejsGo from '../../domain/p400-threejsgo';
@@ -22,6 +23,7 @@ const i18nList: helperI18Next.TypeI18NDomain[] = [
   P500Menu.I18N,
   P001Register.I18N,
   P101Userdashboard.I18N,
+  P102Scoreboard.I18N,
 ];
 
 const JSX = (props: any) => {
@@ -47,6 +49,7 @@ const JSX = (props: any) => {
         >
           <Route index element={<Navigate replace to="userdashboard" />} />
           <Route path="userdashboard" element={<P101Userdashboard.JSX />} />
+          <Route path="scoreboard" element={<P102Scoreboard.JSX />} />
 
           <Route path="dashboard" element={<P100Dashboard.JSX />} />
           <Route path="threejs" element={<P200ThreeJS.JSX />} />

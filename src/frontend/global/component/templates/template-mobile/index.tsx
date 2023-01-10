@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { BiCube, BiGame, BiHome, BiMenu } from 'react-icons/bi';
-import { MdAddLocationAlt } from 'react-icons/md';
+import { MdAddLocationAlt, MdScore } from 'react-icons/md';
 
 import { getMethodStoreGlobal, getStoreGlobal, useStoreGlobal } from '../../../store';
 import LinkSafe from '../../atoms/link-safe';
@@ -65,9 +65,9 @@ const UITemplateMobile = (props: any) => {
               <LinkSafe
                 className="flex justify-items-center"
                 disabled={menu.iIconID === 2}
-                to="/user/threejs"
+                to="/user/scoreboard"
               >
-                <BiCube
+                <MdScore
                   className={menu.iIconID === 2 ? 'text-primary-select' : 'text-primary'}
                   size="2.3em"
                 />
