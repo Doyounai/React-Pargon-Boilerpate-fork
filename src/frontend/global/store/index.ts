@@ -59,7 +59,6 @@ export type TypeMethodStoreGlobal = {
     isShowI18n: boolean,
     isShowFooter: boolean,
   ) => void;
-
   // signIn: (sEmail: string, sPassword: string) => Promise<helperType.TypeGolangResponse>;
   // signOut: () => void;
 };
@@ -97,7 +96,6 @@ export const methodStoreGlobal: TypeMethodStoreGlobal = {
       menuUIIsShow: { isShowHeader, isShowI18n, isShowFooter },
     });
   },
-
   // signIn: async (
   //   sEmail: string,
   //   sPassword: string,

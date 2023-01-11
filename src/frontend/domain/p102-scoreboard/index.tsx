@@ -25,12 +25,11 @@ const JSX = () => {
 
   useEffect(() => {
     setI18NDomainName(sI18nDomainName);
-    setMenuUIIsShow(false, false, true);
+    setMenuUIIsShow(true, false, true);
     setMenu(t('header'), 2);
   }, []);
   return (
     <>
-      <div className="py-2 text-center text-4xl">Scoreboard</div>
       <div className="flex-1 overflow-y-auto scroll-smooth">{userScores}</div>
     </>
   );

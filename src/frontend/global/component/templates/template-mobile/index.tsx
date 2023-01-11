@@ -1,5 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { BiCube, BiGame, BiHome, BiMenu } from 'react-icons/bi';
+import { BsChatDotsFill } from 'react-icons/bs';
+import { MdVideogameAsset } from 'react-icons/md';
 import { MdAddLocationAlt, MdScore } from 'react-icons/md';
 
 import { getMethodStoreGlobal, getStoreGlobal, useStoreGlobal } from '../../../store';
@@ -75,30 +77,21 @@ const UITemplateMobile = (props: any) => {
               <LinkSafe
                 className="flex justify-items-center"
                 disabled={menu.iIconID === 3}
-                to="/user/impactjs"
+                to="/user/chat"
               >
-                <BiGame
+                <MdVideogameAsset
                   className={menu.iIconID === 3 ? 'text-primary-select' : 'text-primary'}
                   size="2.3em"
                 />
               </LinkSafe>
+
               <LinkSafe
                 className="flex justify-items-center"
                 disabled={menu.iIconID === 4}
-                to="/user/threejsgo"
-              >
-                <MdAddLocationAlt
-                  className={menu.iIconID === 4 ? 'text-primary-select' : 'text-primary'}
-                  size="2.3em"
-                />
-              </LinkSafe>
-              <LinkSafe
-                className="flex justify-items-center"
-                disabled={menu.iIconID === 5}
                 to="/user/menu"
               >
                 <BiMenu
-                  className={menu.iIconID === 5 ? 'text-primary-select' : 'text-primary'}
+                  className={menu.iIconID === 4 ? 'text-primary-select' : 'text-primary'}
                   size="2.7em"
                 />
               </LinkSafe>
