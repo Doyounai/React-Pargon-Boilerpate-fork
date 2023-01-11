@@ -11,6 +11,7 @@ import P300ImpactJS from '../../domain/p300-impactjs';
 import P400ThreejsGo from '../../domain/p400-threejsgo';
 import P500Menu from '../../domain/p500-menu';
 import P600Chat from '../../domain/p600-game';
+import P700Usersettings from '../../domain/p700-usersettings';
 import RoutePrivate from '../component/atoms/route-private';
 import TemplateMobile from '../component/templates/template-mobile';
 import { useStoreGlobalPersist } from '../store/persist';
@@ -26,6 +27,7 @@ const i18nList: helperI18Next.TypeI18NDomain[] = [
   P101Userdashboard.I18N,
   P102Scoreboard.I18N,
   P600Chat.I18N,
+  P700Usersettings.I18N,
 ];
 
 const JSX = (props: any) => {
@@ -53,6 +55,7 @@ const JSX = (props: any) => {
           <Route path="userdashboard" element={<P101Userdashboard.JSX />} />
           <Route path="scoreboard" element={<P102Scoreboard.JSX />} />
           <Route path="chat" element={<P600Chat.JSX />} />
+          <Route path="usersetting" element={<P700Usersettings.JSX />} />
 
           <Route path="dashboard" element={<P100Dashboard.JSX />} />
           <Route path="threejs" element={<P200ThreeJS.JSX />} />
