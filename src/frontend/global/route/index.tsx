@@ -12,6 +12,11 @@ import P400ThreejsGo from '../../domain/p400-threejsgo';
 import P500Menu from '../../domain/p500-menu';
 import P600Chat from '../../domain/p600-game';
 import P700Usersettings from '../../domain/p700-usersettings';
+import P800Ghoststory from '../../domain/p800-ghoststory';
+import P801Ghoststory1 from '../../domain/p801-ghoststory-1';
+import P802Ghoststory2 from '../../domain/p802-ghoststory-2';
+import P803Ghoststory3 from '../../domain/p803-ghoststory-3';
+import P804Ghoststory4 from '../../domain/p804-ghoststory-4';
 import RoutePrivate from '../component/atoms/route-private';
 import TemplateMobile from '../component/templates/template-mobile';
 import { useStoreGlobalPersist } from '../store/persist';
@@ -28,6 +33,11 @@ const i18nList: helperI18Next.TypeI18NDomain[] = [
   P102Scoreboard.I18N,
   P600Chat.I18N,
   P700Usersettings.I18N,
+  P800Ghoststory.I18N,
+  P801Ghoststory1.I18N,
+  P802Ghoststory2.I18N,
+  P803Ghoststory3.I18N,
+  P804Ghoststory4.I18N,
 ];
 
 const JSX = (props: any) => {
@@ -56,6 +66,13 @@ const JSX = (props: any) => {
           <Route path="scoreboard" element={<P102Scoreboard.JSX />} />
           <Route path="chat" element={<P600Chat.JSX />} />
           <Route path="usersetting" element={<P700Usersettings.JSX />} />
+          <Route path="ghoststory">
+            <Route index element={<P800Ghoststory.JSX />} />
+            <Route path="ghost1" element={<P801Ghoststory1.JSX />} />
+            <Route path="ghost2" element={<P802Ghoststory2.JSX />} />
+            <Route path="ghost3" element={<P803Ghoststory3.JSX />} />
+            <Route path="ghost4" element={<P804Ghoststory4.JSX />} />
+          </Route>
 
           <Route path="dashboard" element={<P100Dashboard.JSX />} />
           <Route path="threejs" element={<P200ThreeJS.JSX />} />
