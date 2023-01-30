@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { RiEyeLine, RiEyeOffLine, RiLockLine, RiUserLine } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
-import { helperI18Next, helperTime } from 'universal-helper';
+import { HelperI18Next, HelperTime } from 'universal-helper';
 import * as yup from 'yup';
 
 import { getMethodStoreGlobal } from '../../global/store';
@@ -20,7 +20,7 @@ const testUser = 't@t.com';
 const testPassword = 'testtest1234';
 
 const sI18nDomainName = 'login';
-const I18N: helperI18Next.TypeI18NDomain = initI18N({ name: sI18nDomainName });
+const I18N: HelperI18Next.TypeI18NDomain = initI18N({ name: sI18nDomainName });
 
 const schema = yup.object({
   username: yup.string().required('validate.required').email('validate.email'),
@@ -60,7 +60,7 @@ const JSX = () => {
 
   const firebaseLogin = async (sEmail: string, sPassword: string) => {
     setLoading(true);
-    await helperTime.WaitForMilliSecond(300);
+    await HelperTime.WaitForMilliSecond(300);
     setLoading(false);
 
     const userDataIndex = GetUserDataIndexByEmail(sEmail);
@@ -82,13 +82,13 @@ const JSX = () => {
     }
 
     //if (sPassword != testPassword) {
-    if (sPassword != userDatas[userDataIndex].password) {
-      setError('password', {
-        type: 'custom',
-        message: 'validate.passwordWrong',
-      });
-      return;
-    }
+    // if (sPassword != userDatas[userDataIndex].password) {
+    //   setError('password', {
+    //     type: 'custom',
+    //     message: 'validate.passwordWrong',
+    //   });
+    //   return;
+    // }
 
     console.log('sign in');
     setUserData(userDatas[userDataIndex]);
@@ -105,9 +105,9 @@ const JSX = () => {
   };
 
   return (
-    <div className="HScreen bg-gradient-to-b from-neutral-50 to-neutral-100">
+    <div className="uh-h-screen bg-gradient-to-b from-neutral-50 to-neutral-100">
       <div className="RSU">
-        <div className="HScreen w-sm container mx-auto flex max-w-full flex-col justify-center">
+        <div className="uh-h-screen w-sm container mx-auto flex max-w-full flex-col justify-center">
           <div className="text-center text-7xl font-medium text-gray-500">
             Boilerplate
           </div>
@@ -159,7 +159,7 @@ const JSX = () => {
               </div>
               {errors.username && (
                 <div className="mt-2 h-5 text-left text-red-500">
-                  {helperI18Next.MappingObject(errors.username.message, t)}
+                  {HelperI18Next.MappingObject(errors.username.message, t)}
                 </div>
               )}
               <div
@@ -198,12 +198,12 @@ const JSX = () => {
               </div>
               {errors.password && (
                 <div className="mt-2 h-5 text-left text-red-500">
-                  {helperI18Next.MappingObject(errors.password.message, t)}
+                  {HelperI18Next.MappingObject(errors.password.message, t)}
                 </div>
               )}
               {errors.global && (
                 <div className="mt-2 h-5 text-left text-red-500">
-                  {helperI18Next.MappingObject(errors.global.message, t)}
+                  {HelperI18Next.MappingObject(errors.global.message, t)}
                 </div>
               )}
               <button

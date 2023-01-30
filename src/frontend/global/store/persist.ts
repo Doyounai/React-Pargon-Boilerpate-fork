@@ -1,4 +1,4 @@
-import { helperZustand } from 'universal-helper';
+import { HelperZustand } from 'universal-helper';
 import { object } from 'yup';
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
@@ -54,7 +54,7 @@ export const useStoreGlobalPersist = (
   stateList: string[],
   isShallow?: boolean,
 ): TypeStoreGlobalPersist => {
-  return helperZustand.StateMapping(
+  return HelperZustand.StateMapping(
     stateList,
     storeGlobalPersist,
     isShallow,

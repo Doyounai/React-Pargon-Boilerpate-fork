@@ -9,7 +9,7 @@ import {
   Tooltip,
 } from 'chart.js';
 
-export const middlewareChartJSInit = () => {
+export const MiddlewareChartJSInit = () => {
   ChartJS.register(
     ArcElement,
     Tooltip,

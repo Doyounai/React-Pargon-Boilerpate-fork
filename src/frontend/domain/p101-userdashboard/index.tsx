@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { helperI18Next } from 'universal-helper';
+import { HelperI18Next } from 'universal-helper';
 
 import { getMethodStoreGlobal } from '../../global/store';
 import {
@@ -13,7 +13,7 @@ import UIMock from './component/ui-mock';
 import initI18N from './i18n';
 
 const sI18nDomainName = 'userdashboard';
-const I18N: helperI18Next.TypeI18NDomain = initI18N({ name: sI18nDomainName });
+const I18N: HelperI18Next.TypeI18NDomain = initI18N({ name: sI18nDomainName });
 
 const JSX = () => {
   const { setMenu, setI18NDomainName, setMenuUIIsShow } = getMethodStoreGlobal();

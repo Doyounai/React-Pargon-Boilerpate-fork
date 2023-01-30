@@ -1,5 +1,5 @@
-import { fixbugScreen } from './fixbug-screen';
+import { FixbugScreen } from './fixbug-screen';
 
-export const fixbugInit = () => {
-  fixbugScreen();
+export const FixbugInit = () => {
+  FixbugScreen();
 };

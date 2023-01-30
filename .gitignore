@@ -31,3 +31,5 @@ analytics/*
 .secret/*
 
 todo-list.md
+
+hosting/public/*

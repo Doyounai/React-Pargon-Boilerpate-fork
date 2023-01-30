@@ -12,6 +12,7 @@ export default defineConfig({
     dedupe: ['react'],
   },
   build: {
+    outDir: './hosting/public',
     sourcemap: false,
     rollupOptions: {
       plugins: [

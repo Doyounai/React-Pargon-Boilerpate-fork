@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { RiEyeLine, RiEyeOffLine, RiLockLine, RiUserLine } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
-import { helperI18Next, helperTime } from 'universal-helper';
+import { HelperI18Next, HelperTime } from 'universal-helper';
 import * as yup from 'yup';
 
 import { getMethodStoreGlobal } from '../../global/store';
@@ -21,7 +21,7 @@ const testUser = 't@t.com';
 const testPassword = 'testtest1234';
 
 const sI18nDomainName = 'register';
-const I18N: helperI18Next.TypeI18NDomain = initI18N({ name: sI18nDomainName });
+const I18N: HelperI18Next.TypeI18NDomain = initI18N({ name: sI18nDomainName });
 
 const schema = yup.object({
   username: yup.string().required('validate.required'),
@@ -62,7 +62,7 @@ const JSX = () => {
 
   const Register = async (sEmail: string, sUsername: string, sPassword: string) => {
     setLoading(true);
-    await helperTime.WaitForMilliSecond(300);
+    await HelperTime.WaitForMilliSecond(300);
     setLoading(false);
 
     // set new userdata
@@ -155,7 +155,7 @@ const JSX = () => {
               </div>
               {errors.username && (
                 <div className="mt-2 h-5 text-left text-red-500">
-                  {helperI18Next.MappingObject(errors.username.message, t)}
+                  {HelperI18Next.MappingObject(errors.username.message, t)}
                 </div>
               )}
 
@@ -179,7 +179,7 @@ const JSX = () => {
               </div>
               {errors.email && (
                 <div className="mt-2 h-5 text-left text-red-500">
-                  {helperI18Next.MappingObject(errors.email.message, t)}
+                  {HelperI18Next.MappingObject(errors.email.message, t)}
                 </div>
               )}
               <div
@@ -218,12 +218,12 @@ const JSX = () => {
               </div>
               {errors.password && (
                 <div className="mt-2 h-5 text-left text-red-500">
-                  {helperI18Next.MappingObject(errors.password.message, t)}
+                  {HelperI18Next.MappingObject(errors.password.message, t)}
                 </div>
               )}
               {errors.global && (
                 <div className="mt-2 h-5 text-left text-red-500">
-                  {helperI18Next.MappingObject(errors.global.message, t)}
+                  {HelperI18Next.MappingObject(errors.global.message, t)}
                 </div>
               )}
               <button

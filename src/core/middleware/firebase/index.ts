@@ -17,12 +17,13 @@ const firebaseConfig = {
 
 let app: FirebaseApp;
 
-export const middlewareFirebaseInit = () => {
+export const middlewareFirebaseInit = async () => {
   app = initializeApp(firebaseConfig);
-  AuthInit(app);
+  await AuthInit(app);
   // FuncionsInit(app, import.meta.env.VITE_FIREBASE_CONFIG_FUNCTION_REGION);
   // RealtimeDatabaseInit(app);
-  FirestoreInit(app);
+  // FirestoreInit(app);
+  // MessagingInit(app);
 };
 
 export const middlewareFirebase = {

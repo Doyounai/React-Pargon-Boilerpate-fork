@@ -1,7 +1,6 @@
 import { useTranslation } from 'react-i18next';
 import { BiCube, BiGame, BiHome, BiMenu } from 'react-icons/bi';
 import { BsChatDotsFill, BsGearFill } from 'react-icons/bs';
-import { FaSnapchatGhost } from 'react-icons/fa';
 import { MdVideogameAsset } from 'react-icons/md';
 import { MdAddLocationAlt, MdScore } from 'react-icons/md';
 
@@ -24,8 +23,8 @@ const UITemplateMobile = (props: any) => {
   const defaultRoute = '/user/dashboard';
   return (
     <>
-      <div className="HScreen from-grad-default-white-from to-grad-default-white-to m-0 bg-gradient-to-b">
-        <div className="HScreen divide-y-1.5 mx-auto flex max-w-lg flex-col">
+      <div className="uh-h-screen from-grad-default-white-from to-grad-default-white-to m-0 bg-gradient-to-b">
+        <div className="uh-h-screen divide-y-1.5 mx-auto flex max-w-lg flex-col">
           {menuUIIsShow.isShowHeader && (
             <div className="text-primary text-primary my-auto flex h-12 w-full flex-row items-center justify-center bg-white pb-0.5 text-center text-2xl font-bold">
               <div className="mt-1 flex-1 truncate text-ellipsis">{menu.sHeaderName}</div>
@@ -98,11 +97,11 @@ const UITemplateMobile = (props: any) => {
               <LinkSafe
                 className="flex justify-items-center"
                 disabled={menu.iIconID === 5}
-                to="/user/ghoststory"
+                to="/user/menu"
               >
-                <FaSnapchatGhost
+                <BiMenu
                   className={menu.iIconID === 5 ? 'text-primary-select' : 'text-primary'}
-                  size="2.2em"
+                  size="2.7em"
                 />
               </LinkSafe>
             </div>

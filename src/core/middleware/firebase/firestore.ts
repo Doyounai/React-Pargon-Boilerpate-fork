@@ -3,8 +3,15 @@ import { doc, Firestore, getDoc, getFirestore, setDoc } from 'firebase/firestore
 
 let firestore: Firestore;
 export const FirestoreInit = (app: FirebaseApp) => {
+  console.log('Firebase Init : Firestore');
   firestore = getFirestore(app);
 };
+
+export const GetFirestore = (): Firestore => {
+  return firestore;
+};
+
+// ====================================
 
 const GetDocOrCreateIfNotExist = async (
   sCollection: string,
@@ -26,7 +33,7 @@ const GetDocOrCreateIfNotExist = async (
 const GetDoc = (sCollection: string, sDoc: string) => {
   return getDoc(doc(firestore, sCollection, sDoc));
 
-  // return helperPromise.GolangResponse(getDoc(doc(firestore, sCollection, sDoc)));
+  // return HelperPromise.GolangResponse(getDoc(doc(firestore, sCollection, sDoc)));
 };
 const SetDoc = (
   sCollection: string,
@@ -40,7 +47,7 @@ const SetDoc = (
     isMerge ? { merge: true } : {},
   );
 
-  // return helperPromise.GolangResponse(getDoc(doc(firestore, sCollection, sDoc)));
+  // return HelperPromise.GolangResponse(getDoc(doc(firestore, sCollection, sDoc)));
 };
 
 export default {

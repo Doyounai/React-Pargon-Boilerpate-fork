@@ -1,7 +1,7 @@
 // import './index.css';
 
 import { useEffect } from 'react';
-import { helperI18Next } from 'universal-helper';
+import { HelperI18Next } from 'universal-helper';
 import { WaitForMilliSecond } from 'universal-helper/src/helper/time';
 
 // import scriptImport from '../../global/component/atoms/script-import';
@@ -13,7 +13,7 @@ import initI18N from './i18n';
 // import * from '../../../../src/interactive/domain/impact-js/'
 // import
 const sI18nDomainName = 'impactjs';
-const I18N: helperI18Next.TypeI18NDomain = initI18N({ name: sI18nDomainName });
+const I18N: HelperI18Next.TypeI18NDomain = initI18N({ name: sI18nDomainName });
 
 const canvasGame = document.createElement('canvas');
 canvasGame.id = 'canvas';

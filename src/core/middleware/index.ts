@@ -1,14 +1,14 @@
-import { helperI18Next } from 'universal-helper';
+import { HelperI18Next } from 'universal-helper';
 
-// import { middlewareFirebaseInit } from './firebase';
+// import { middlewareFirebase, middlewareFirebaseInit } from './firebase';
 
-export const middlewareInit = ({
+export const MiddlewareInit = async ({
   i18nList = [],
 }: {
-  i18nList: helperI18Next.TypeI18NDomain[];
+  i18nList: HelperI18Next.TypeI18NDomain[];
 }) => {
   // console.log('Middleware Init');
-  helperI18Next.MiddlewareInit(
+  HelperI18Next.MiddlewareInit(
     {
       debug: import.meta.env.VITE_DEBUG_MIDDLEWARE_I18NEXT == 'true',
       fallbackLng: 'th',
@@ -16,6 +16,6 @@ export const middlewareInit = ({
     i18nList,
   );
 
-  //  middlewareFirebaseInit();
+  // await middlewareFirebaseInit();
   // middlewareChartJSInit
 };

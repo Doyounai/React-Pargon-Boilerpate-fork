@@ -1,4 +1,4 @@
-import { helperZustand } from 'universal-helper';
+import { HelperZustand } from 'universal-helper';
 import create from 'zustand';
 
 // import {
@@ -133,7 +133,7 @@ export const useStoreGlobal = (
   stateList: string[],
   isShallow?: boolean,
 ): TypeStoreGlobal => {
-  return helperZustand.StateMapping(stateList, storeGlobal, isShallow) as TypeStoreGlobal;
+  return HelperZustand.StateMapping(stateList, storeGlobal, isShallow) as TypeStoreGlobal;
 };
 
 export const getMethodStoreGlobal = (): TypeMethodStoreGlobal => {

@@ -1,7 +1,7 @@
 // import './index.css';
 
 import React, { useEffect, useState } from 'react';
-import { helperI18Next } from 'universal-helper';
+import { HelperI18Next } from 'universal-helper';
 
 import { GameCore } from '../../../interactive/domain/three-js';
 // import { useTranslation } from 'react-i18next';
@@ -9,7 +9,7 @@ import { getMethodStoreGlobal, useStoreGlobal } from '../../global/store';
 import initI18N from './i18n';
 // import
 const sI18nDomainName = 'threejs';
-const I18N: helperI18Next.TypeI18NDomain = initI18N({ name: sI18nDomainName });
+const I18N: HelperI18Next.TypeI18NDomain = initI18N({ name: sI18nDomainName });
 
 class GameThreeJS extends React.Component<
   { gameCore: any; className?: string | undefined },

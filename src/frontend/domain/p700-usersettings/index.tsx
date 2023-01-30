@@ -4,7 +4,7 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { helperI18Next, helperTime } from 'universal-helper';
+import { HelperI18Next, HelperTime } from 'universal-helper';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { getMethodStoreGlobal } from '../../global/store';
@@ -15,7 +15,7 @@ import {
 import initI18N from './i18n';
 
 const sI18nDomainName = 'usersetting';
-const I18N: helperI18Next.TypeI18NDomain = initI18N({ name: sI18nDomainName });
+const I18N: HelperI18Next.TypeI18NDomain = initI18N({ name: sI18nDomainName });
 
 const schema = yup.object({
   username: yup.string().required('กรุณาใส่ผู้ใช้งานใหม่'),
@@ -50,7 +50,7 @@ const JSX = () => {
   };
   const Register = async (sUsername: string) => {
     setLoading(true);
-    await helperTime.WaitForMilliSecond(300);
+    await HelperTime.WaitForMilliSecond(300);
     setLoading(false);
 
     const currentUserIndex = GetUserDataIndexByEmail(userData.email);
@@ -105,7 +105,7 @@ const JSX = () => {
           </div>
           {errors.username && (
             <div className="mt-2 h-5 text-left text-red-500">
-              {helperI18Next.MappingObject(errors.username.message, t)}
+              {HelperI18Next.MappingObject(errors.username.message, t)}
             </div>
           )}
           <button
