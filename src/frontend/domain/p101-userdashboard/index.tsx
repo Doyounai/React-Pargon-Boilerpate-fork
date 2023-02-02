@@ -1,9 +1,14 @@
 // import './index.css';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { HelperI18Next } from 'universal-helper';
 
+import {
+  middlewareFirebase,
+  middlewareFirebaseInit,
+} from '../../../core/middleware/firebase';
+import APIGlobal from '../../global/api';
 import { getMethodStoreGlobal } from '../../global/store';
 import {
   getMethodStoreGlobalPersist,
@@ -18,8 +23,27 @@ const I18N: HelperI18Next.TypeI18NDomain = initI18N({ name: sI18nDomainName });
 const JSX = () => {
   const { setMenu, setI18NDomainName, setMenuUIIsShow } = getMethodStoreGlobal();
   const { t } = useTranslation([sI18nDomainName]);
-  const { userData } = useStoreGlobalPersist(['userData']);
+
+  // local storage
+  // const { userData } = useStoreGlobalPersist(['userData']);
   const { setUserData } = getMethodStoreGlobalPersist();
+
+  // firebase
+  let userData: any = null;
+  const [username, setUsername] = useState();
+  const [gamescore, setGamescore] = useState();
+  // const { currentUser } = middlewareFirebase.Auth.GetAuth();
+
+  useEffect(() => {
+    const update = async () => {
+      await middlewareFirebaseInit();
+      userData = await APIGlobal.readUserProfile();
+      // console.log(userData.res.data['username']);
+      setUsername(userData.res.data['username']);
+      setGamescore(userData.res.data['gamescore']);
+    };
+    update();
+  });
 
   useEffect(() => {
     setI18NDomainName(sI18nDomainName);
@@ -30,13 +54,13 @@ const JSX = () => {
     <>
       <div className="flex-1 overflow-y-auto">
         <div className="py-3.5 text-center text-4xl">
-          {t('dashboard.username')} : {userData.username}
+          {t('dashboard.username')} : {username}
         </div>
+        {/* <div className="py-3.5 text-center text-4xl">
+          {t('dashboard.email')} : {currentUser?.email}
+        </div> */}
         <div className="py-3.5 text-center text-4xl">
-          {t('dashboard.email')} : {userData.email}
-        </div>
-        <div className="py-3.5 text-center text-4xl">
-          {t('dashboard.gamescore')} : {userData.gamescore}
+          {t('dashboard.gamescore')} : {gamescore}
         </div>
 
         <button

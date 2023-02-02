@@ -9,6 +9,11 @@ import { useNavigate } from 'react-router-dom';
 import { HelperI18Next, HelperTime } from 'universal-helper';
 import * as yup from 'yup';
 
+import {
+  middlewareFirebase,
+  middlewareFirebaseInit,
+} from '../../../core/middleware/firebase';
+import APIGlobal from '../../global/api';
 import { getMethodStoreGlobal } from '../../global/store';
 import {
   getMethodStoreGlobalPersist,
@@ -65,18 +70,35 @@ const JSX = () => {
 
     const userDataIndex = GetUserDataIndexByEmail(sEmail);
 
-    if (userDataIndex == -1) {
+    // if (userDataIndex == -1) {
+    //   setError('username', {
+    //     type: 'custom',
+    //     message: 'validate.userNotFound',
+    //   });
+    //   return;
+    // }
+
+    // if (sPassword == 'global') {
+    //   setError('global', {
+    //     type: 'custom',
+    //     message: 'validate.networkRequestFailed',
+    //   });
+    //   return;
+    // }
+
+    // firebase
+    await middlewareFirebaseInit();
+    const res = await middlewareFirebase.Auth.SignInWithEmailAndPassword(
+      sEmail,
+      sPassword,
+    );
+
+    console.log('res', res.error);
+
+    if (res.error?.message != null) {
       setError('username', {
         type: 'custom',
         message: 'validate.userNotFound',
-      });
-      return;
-    }
-
-    if (sPassword == 'global') {
-      setError('global', {
-        type: 'custom',
-        message: 'validate.networkRequestFailed',
       });
       return;
     }
@@ -91,8 +113,10 @@ const JSX = () => {
     // }
 
     console.log('sign in');
-    setUserData(userDatas[userDataIndex]);
-    navigate('/user/dashboard');
+    //setUserData(userDatas[userDataIndex]);
+    setUserData([]);
+
+    navigate('/user/userdashboard');
   };
 
   const onSubmit = async (data: any) => {
@@ -109,7 +133,7 @@ const JSX = () => {
       <div className="RSU">
         <div className="uh-h-screen w-sm container mx-auto flex max-w-full flex-col justify-center">
           <div className="text-center text-7xl font-medium text-gray-500">
-            Boilerplate
+            Boilerplate.
           </div>
           {/* <select
               onChange={(event: any) => i18n.changeLanguage(event.target.value)}

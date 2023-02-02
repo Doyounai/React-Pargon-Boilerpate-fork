@@ -7,6 +7,8 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { HelperI18Next } from 'universal-helper';
 
+import { middlewareFirebaseInit } from '../../../core/middleware/firebase';
+import APIGlobal from '../../global/api';
 import { getMethodStoreGlobal } from '../../global/store';
 import {
   getMethodStoreGlobalPersist,
@@ -65,15 +67,24 @@ const JSX = () => {
   }
 
   const onShowResult = () => {
-    const currentUserIndex = GetUserDataIndexByEmail(userData.email);
-    const temp = userData;
-    const userDatasTemp = userDatas;
-
-    temp.gamescore = score;
-    userDatasTemp[currentUserIndex] = temp;
-
-    setUserData(temp);
-    setUserDatas(userDatasTemp);
+    // const currentUserIndex = GetUserDataIndexByEmail(userData.email);
+    // const temp = userData;
+    // const userDatasTemp = userDatas;
+    // temp.gamescore = score;
+    // userDatasTemp[currentUserIndex] = temp;
+    // setUserData(temp);
+    // setUserDatas(userDatasTemp);
+    useEffect(() => {
+      const update = async () => {
+        await middlewareFirebaseInit();
+        const res = await APIGlobal.editFieldInCollection({
+          key: 'gamescore',
+          value: score,
+        });
+        console.log('game res', res);
+      };
+      update();
+    });
   };
 
   const section =

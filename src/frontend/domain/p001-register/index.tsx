@@ -9,6 +9,11 @@ import { useNavigate } from 'react-router-dom';
 import { HelperI18Next, HelperTime } from 'universal-helper';
 import * as yup from 'yup';
 
+import {
+  middlewareFirebase,
+  middlewareFirebaseInit,
+} from '../../../core/middleware/firebase';
+import APIGlobal from '../../global/api';
 import { getMethodStoreGlobal } from '../../global/store';
 import {
   getMethodStoreGlobalPersist,
@@ -77,24 +82,48 @@ const JSX = () => {
     // console.log('Save');
     // return;
 
-    if (GetUserDataIndexByEmail(sEmail) != -1) {
-      setError('email', {
-        type: 'custom',
-        message: 'validate.dupicateEmail',
-      });
+    // if (GetUserDataIndexByEmail(sEmail) != -1) {
+    //   setError('email', {
+    //     type: 'custom',
+    //     message: 'validate.dupicateEmail',
+    //   });
+    //   return;
+    // }
+
+    // const newUserdata = {
+    //   email: sEmail,
+    //   username: sUsername,
+    //   password: sPassword,
+    //   gamescore: 0,
+    // };
+    // const temp = userDatas;
+    // temp.push(newUserdata);
+
+    // setUserDatas(temp);
+
+    await middlewareFirebaseInit();
+    // fire base register
+    // const res = await middlewareFirebase.Auth.CreateUserWithEmailAndPassword(
+    //   sEmail,
+    //   sPassword,
+    // );
+
+    // const res = await APIGlobal.readUserProfile();
+    const res = await middlewareFirebase.Auth.CreateUserWithEmailAndPassword(
+      sEmail,
+      sPassword,
+    );
+    console.log('res', res);
+
+    // error
+    if (res['error'] != null) {
       return;
     }
 
-    const newUserdata = {
-      email: sEmail,
-      username: sUsername,
-      password: sPassword,
-      gamescore: 0,
-    };
-    const temp = userDatas;
-    temp.push(newUserdata);
-
-    setUserDatas(temp);
+    const res2 = await APIGlobal.createNewUserCollection({
+      sUsername,
+    });
+    console.log('res2', res2);
     navigate('/');
   };
 
@@ -108,9 +137,9 @@ const JSX = () => {
   };
 
   return (
-    <div className="HScreen bg-gradient-to-b from-neutral-50 to-neutral-100">
+    <div className="uh-h-screen bg-gradient-to-b from-neutral-50 to-neutral-100">
       <div className="RSU">
-        <div className="HScreen w-sm container mx-auto flex max-w-full flex-col justify-center">
+        <div className="uh-h-screen w-sm container mx-auto flex max-w-full flex-col justify-center">
           <div className="text-center text-7xl font-medium text-gray-500">
             {t('form.title')}
           </div>

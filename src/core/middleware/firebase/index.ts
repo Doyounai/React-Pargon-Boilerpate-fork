@@ -22,7 +22,7 @@ export const middlewareFirebaseInit = async () => {
   await AuthInit(app);
   // FuncionsInit(app, import.meta.env.VITE_FIREBASE_CONFIG_FUNCTION_REGION);
   // RealtimeDatabaseInit(app);
-  // FirestoreInit(app);
+  FirestoreInit(app);
   // MessagingInit(app);
 };
 

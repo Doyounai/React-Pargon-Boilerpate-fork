@@ -1,6 +1,7 @@
 import { useTranslation } from 'react-i18next';
 import { BiCube, BiGame, BiHome, BiMenu } from 'react-icons/bi';
 import { BsChatDotsFill, BsGearFill } from 'react-icons/bs';
+import { FaSnapchatGhost } from 'react-icons/fa';
 import { MdVideogameAsset } from 'react-icons/md';
 import { MdAddLocationAlt, MdScore } from 'react-icons/md';
 
@@ -97,11 +98,11 @@ const UITemplateMobile = (props: any) => {
               <LinkSafe
                 className="flex justify-items-center"
                 disabled={menu.iIconID === 5}
-                to="/user/menu"
+                to="/user/ghoststory"
               >
-                <BiMenu
+                <FaSnapchatGhost
                   className={menu.iIconID === 5 ? 'text-primary-select' : 'text-primary'}
-                  size="2.7em"
+                  size="2.2em"
                 />
               </LinkSafe>
             </div>

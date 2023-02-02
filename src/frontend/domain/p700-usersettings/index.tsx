@@ -2,7 +2,7 @@
 
 // eslint-disable-next-line simple-import-sort/imports
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { HelperI18Next, HelperTime } from 'universal-helper';
 import * as yup from 'yup';
@@ -13,6 +13,8 @@ import {
   useStoreGlobalPersist,
 } from '../../global/store/persist';
 import initI18N from './i18n';
+import { middlewareFirebaseInit } from '../../../core/middleware/firebase';
+import APIGlobal from '../../global/api';
 
 const sI18nDomainName = 'usersetting';
 const I18N: HelperI18Next.TypeI18NDomain = initI18N({ name: sI18nDomainName });
@@ -53,23 +55,31 @@ const JSX = () => {
     await HelperTime.WaitForMilliSecond(300);
     setLoading(false);
 
-    const currentUserIndex = GetUserDataIndexByEmail(userData.email);
-    const userDataTemp = userData;
-    const userDatasTemp = userDatas;
+    // local
+    // const currentUserIndex = GetUserDataIndexByEmail(userData.email);
+    // const userDataTemp = userData;
+    // const userDatasTemp = userDatas;
 
-    if (userDataTemp.username == sUsername) {
-      setError('username', {
-        type: 'custom',
-        message: 'กรุณากรอกชื่อผู้ใช้งานใหม่',
-      });
-      return;
-    }
+    // if (userDataTemp.username == sUsername) {
+    //   setError('username', {
+    //     type: 'custom',
+    //     message: 'กรุณากรอกชื่อผู้ใช้งานใหม่',
+    //   });
+    //   return;
+    // }
 
-    userDataTemp.username = sUsername;
-    userDatasTemp[currentUserIndex] = userDataTemp;
+    // userDataTemp.username = sUsername;
+    // userDatasTemp[currentUserIndex] = userDataTemp;
 
-    setUserData(userDataTemp);
-    setUserDatas(userDatasTemp);
+    // setUserData(userDataTemp);
+    // setUserDatas(userDatasTemp);
+
+    // firebase
+    const res = await APIGlobal.editFieldInCollection({
+      key: 'username',
+      value: sUsername,
+    });
+    console.log('edit user name res', res);
   };
 
   const onSubmit = async (data: any) => {
@@ -81,11 +91,25 @@ const JSX = () => {
     setMenuUIIsShow(true, false, true);
     setMenu(t('header'), 4);
   }, []);
+
+  // firebase
+  const [firebaseUserName, setFirebaseUserName] = useState();
+
+  useEffect(() => {
+    const fetchNewUserName = async () => {
+      await middlewareFirebaseInit();
+      const res = await APIGlobal.readUserProfile();
+      if (res.error != null) return;
+      setFirebaseUserName(res.res?.data['username']);
+    };
+    fetchNewUserName();
+  });
+
   return (
     <>
       <div className="flex-1 overflow-y-auto">
         <div className="py-3.5 text-center text-4xl">
-          ชื่อผู้ใช้งาน : {userData.username}
+          ชื่อผู้ใช้งาน : {firebaseUserName}
         </div>
         <form className="mt-2" onSubmit={handleSubmit(onSubmit)}>
           <div
